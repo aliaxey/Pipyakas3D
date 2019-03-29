@@ -4,4 +4,5 @@
     IObjectCreator ObjectCreator { get; set; }
     ICameraManager Camera { get; set; }
     IWeaponManager WeaponManager { get; set; }
+    ICorutinier Corutinier { get; set; }
 }

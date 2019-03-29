@@ -1,13 +1,14 @@
+using System;
 using UnityEngine;
 using static Constants;
 
 public class GridManager :IGridManager{
     private IObjectCreator objectCreator;
     private BaseCell[,] walls;
-    //private Player player;
-    public GridManager(IObjectCreator creator, int width, int height) {
+    public GridManager(IObjectCreator creator,ILevelLoader levelLoader) {
         objectCreator = creator;
-        walls = new BaseCell[width,height]; start();
+        walls = new BaseCell[levelLoader.Size.x,levelLoader.Size.y];
+        InitWalls(levelLoader);
     }
 
     public IObjectCreator ObjectCreator {
@@ -15,37 +16,28 @@ public class GridManager :IGridManager{
             return objectCreator;
         }
     }
-
+    public BaseCell GetCell(Vector2 pos) {
+        return GetCell((int)pos.x, (int)pos.y);
+    }
     public BaseCell GetCell(int x, int y) {
-        return walls[x, y];
+        try {
+            var wall = walls[x, y];
+            return wall;
+        } catch (IndexOutOfRangeException) {
+            return null;
+        }
     }
     public void CreateWall(int x,int y) {
         var block = objectCreator.CreateWall(new Vector3(x * BLOCK_SIZE, y * BLOCK_SIZE, Z_DISTANCE));
         walls[x, y] = new WallCell(block);
     }
     public void ClearCell(int x,int y) {
-        Object.Destroy(GetCell(x,y).Block);
+        UnityEngine.Object.Destroy(GetCell(x,y).Block);
         walls[x, y] = null;
     }
-
-
-
-
-
-
-
-
-    public void start() {
-        //player = new Player(objectCreator.CreatePlayer(new Vector3(0,0*Constants.BLOCK_SIZE,0),Quaternion.identity));
-        CreateWall(0, 1);
-        CreateWall(0, 2);
-        CreateWall(1, 0);
-        CreateWall(2, 0);
-        CreateWall(3, 0);
-        //walls[0, 0] = new WallCell(objectCreator.CreateWall(new Vector3(0, 1* Constants.BLOCK_SIZE, 0)));
-        //walls[0, 0] = new WallCell(objectCreator.CreateWall(new Vector3(0, 2 * Constants.BLOCK_SIZE, 0)));
-       // walls[0, 0] = new WallCell(objectCreator.CreateWall(new Vector3(1* Constants.BLOCK_SIZE, 0 , 0)));
-        //walls[0, 0] = new WallCell(objectCreator.CreateWall(new Vector3(-1* Constants.BLOCK_SIZE, 0, 0)));
-
+    private void InitWalls(ILevelLoader levelLoader) {
+        foreach(Vector2Int wall in levelLoader.Level.walls) {
+            CreateWall(wall.x, wall.y);
+        }
     }
 }

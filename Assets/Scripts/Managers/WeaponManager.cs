@@ -58,6 +58,10 @@ public class WeaponManager : IWeaponManager {
         }
     }
     public bool CheckCell(Vector2 position) {
+        var cell = objectStorage.GridManager.GetCell(position);
+        if (cell != null && cell.IsBarrier) {
+            return true;
+        }
         if (objectStorage.Player.Position.Equals(position)) {
             return true;
         }

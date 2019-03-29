@@ -6,6 +6,8 @@
 [Bb]uild
 /[Bb]uilds/
 /[Ll]ibrary/
+/GAME/
+/oLibrary/
 sysinfo.txt
 *.stackdump
 /Assets/AssetStoreTools*

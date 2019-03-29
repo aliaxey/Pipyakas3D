@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using static Constants;
 public class CameraManager : ICameraManager {
-    private IObjectStorage objectStorage;
+
     private GameObject camera;
     private bool needUpdate;
     private bool canChange;
@@ -9,8 +9,7 @@ public class CameraManager : ICameraManager {
     private Vector2 movie;
     private Vector2 oldPosition;
     private float distance;
-    public CameraManager(IObjectStorage storage) {
-        objectStorage = storage;
+    public CameraManager() {
         camera = GameObject.Find("Main Camera");
         needUpdate = false;
         cameraPosition = new Vector2(CAMERA_CENTER_X, CAMERA_CENTER_Y);
@@ -36,49 +35,3 @@ public class CameraManager : ICameraManager {
 
 
 }
-/*    
- *    private void StartMovie(float x,float y) {
-        movie = new Vector2(x, y);
-        oldPosition = new Vector2(camera.transform.position.x, camera.transform.position.y);
-        distance = 0;
-        needUpdate = true;
-    }
-    private void StopMovie(Vector2 movie) {
-        cameraPosition += movie;
-        needUpdate = false;
-    }
-    public void CheckCamera(Vector2 pos) {
-        if (!needUpdate) {
-            if (pos.x > cameraPosition.x + CAMERA_OFFSET_X) {
-                StartMovie(1, 0);
-                return;
-            }
-            if (pos.x < cameraPosition.x - CAMERA_OFFSET_X) {
-                StartMovie(-1, 0);
-                return;
-            }
-            if (pos.y > cameraPosition.y + CAMERA_OFFSET_Y) {
-                StartMovie(0, 1);
-                return;
-            }
-            if (pos.y < cameraPosition.y - CAMERA_OFFSET_Y) {
-                StartMovie(0, -1);
-                return;
-            }
-        }
-    }
-
-    public void FrameUpdate() {
-        if (needUpdate) {
-            float deltaDistance = Time.deltaTime * CAMERA_SPEED;
-            if (distance >= BLOCK_SIZE) {
-                var doneMovie = movie * BLOCK_SIZE;
-                camera.transform.position = new Vector3(oldPosition.x + doneMovie.x,oldPosition.y + doneMovie.y,CAMERA_Z_DISTANCE);
-                StopMovie(movie);
-            } else {
-                var deltaMovie = movie * deltaDistance;
-                distance += deltaDistance;
-                camera.transform.position = new Vector3(oldPosition.x + deltaMovie.x, oldPosition.y + deltaMovie.y, CAMERA_Z_DISTANCE);
-            }
-        }
-    } */

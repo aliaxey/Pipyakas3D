@@ -1,8 +1,8 @@
 using System.Collections;
+using UnityEngine;
 
-public interface ICorutinier
-{
-    void CorutineStart(IEnumerator enumerator);
-    void CorutineStop(IEnumerator enumerator);
+public interface ICorutinier{
+    Coroutine StartCoroutine(IEnumerator routine);
+    void StopCoroutine(IEnumerator enumerator);
 
 }

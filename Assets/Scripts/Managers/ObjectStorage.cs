@@ -6,8 +6,7 @@ public class ObjectStorage :IObjectStorage{
     private IObjectCreator creator;
     private ICameraManager camera;
     private IWeaponManager weaponManager;
-
-
+    private ICorutinier corutinier;
 
     public  IGridManager GridManager {
         get { return gridManager; }
@@ -29,5 +28,10 @@ public class ObjectStorage :IObjectStorage{
     public IWeaponManager WeaponManager {
         get { return weaponManager; }
         set { weaponManager = value; }
+    }
+
+    public ICorutinier Corutinier {
+        get { return corutinier; }
+        set { corutinier = value; }
     }
 }

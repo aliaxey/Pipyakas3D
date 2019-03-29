@@ -17,10 +17,11 @@ namespace Tests
         [SetUp]
         public void Init() {
             objectCreator = new ObjectCreator();
-            gridManager = new GridManager(objectCreator, Constants.MAP_WIDTH, Constants.MAP_HEIGHT);
+            gridManager = new GridManager(objectCreator,new LevelLoader(1) );
             objectStorage = new ObjectStorage();
-            cameraManager = new CameraManager(objectStorage);
+            cameraManager = new CameraManager();
             weaponManager = new WeaponManager(objectStorage);
+            objectStorage.ObjectCreator = objectCreator;
         }
 
         [Test]
@@ -32,6 +33,18 @@ namespace Tests
             Assert.NotNull(cameraManager);
             Assert.NotNull(weaponManager);
         }
+        [Test]
+        public void PlayerTest() {
+            Player player = new Player(objectStorage, new Vector2(0,0));
+            Assert.NotNull(player);
+        }
+        [Test]
+        public void ParserTest() {
+            var parser = new LevelLoader(1);
+            parser.ReadLevel(1);
+
+        }
+        
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
         // `yield return null;` to skip a frame.

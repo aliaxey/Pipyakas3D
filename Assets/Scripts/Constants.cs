@@ -3,10 +3,10 @@ using UnityEngine;
 public class Constants {
     public const float Z_DISTANCE = 0;
     public const float BLOCK_SIZE = 2f;
-    public const int MAP_WIDTH = 20;
-    public const int MAP_HEIGHT = 20;
     public const float MOVIE_SPEED = 5f;
     public const float ROTATION_SPEED = 360;
+    public const float COOLDOWN = 0.5f;
+    //-----------------------------------------
     public const int CAMERA_CENTER_X = 6;
     public const int CAMERA_CENTER_Y = 2;
     public const int CAMERA_OFFSET_X = 6;
@@ -23,5 +23,8 @@ public class Constants {
     public const string KEY_LEFT = "a";
     public const string KEY_RIGHT = "d";
     public const string KEY_ATTACK = "space";
+    //------------------------------------------
+    public const string LEVEL_DIR = "Assets/Levels/";
+    public const string LEVEL = "level{0}.json";
 }
 
